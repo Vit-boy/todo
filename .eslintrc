@@ -5,5 +5,8 @@
   "extends": ["standard", "plugin:vue/recommended"],
   "plugins": [
     "html"
-  ]
+  ],
+  "rules": {
+    "no-new": "off"
+  }
 }
