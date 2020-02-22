@@ -1,0 +1,10 @@
+# 编辑器添加editorconfig插件才能用
+root = true
+
+[*]
+charset = utf-8
+end_of_line = lf
+indent_size = 2
+indent_style = space
+insert_final_newline = true
+trim_traling_whitespace = true
