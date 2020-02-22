@@ -76,15 +76,15 @@ if (isDev) {
       },
       devServer,
       plugins: defaultPlugins.concat([
-        new webpack.HotModuleReplacementPlugin(),
-        new webpack.NoEmitOnErrorsPlugin()
+        new webpack.HotModuleReplacementPlugin()
+        // new webpack.NoEmitOnErrorsPlugin()
       ])
     })
 } else {
     config = merge(baseConfig, {
       entry: {
-        app: path.join(__dirname, '../src/index.js'),
-        vendor: ['vue']
+        app: path.join(__dirname, '../client/index.js'),
+        // vendor: ['vue']
       },
       output: {
         filename: '[name].[chunkhash:8].js'
@@ -93,30 +93,66 @@ if (isDev) {
         rules: [
           {
             test: /\.styl/,
-            use: ExtractPlugin.extract({
-                fallback: 'vue-style-loader',
-                use: [
-                    'css-loader',
-                    {
-                        loader: 'postcss-loader',
+            oneOf: [
+              {
+                resourceQuery: /module/,
+                use: ExtractPlugin.extract({
+                  fallback: 'vue-style-loader',
+                  use: [
+                      {
+                        loader: 'css-loader',
                         options: {
-                            sourceMap: true,
+                          modules: true,
+                          localIdentName: '[path]-[name]-[hash:base64:5]',
+                          camelCase: true
                         }
-                    },
-                    'stylus-loader'
-                ]
-            })
+                      },
+                      {
+                          loader: 'postcss-loader',
+                          options: {
+                              sourceMap: true,
+                          }
+                      },
+                      'stylus-loader'
+                  ]
+                })
+              },
+              {
+                use: ExtractPlugin.extract({
+                  fallback: 'vue-style-loader',
+                  use: [
+                      'css-loader',
+                      {
+                          loader: 'postcss-loader',
+                          options: {
+                              sourceMap: true,
+                          }
+                      },
+                      'stylus-loader'
+                  ]
+                })
+              }
+            ]
           }
         ]
       },
+      optimization: {
+        splitChunks: {
+          chunks: 'all'
+        },
+        runtimeChunk: true
+      },
       plugins: defaultPlugins.concat([
-        new ExtractPlugin('styles.[contentHash:8].css'),
-        new webpack.optimize.CommonsChunkPlugin({
-            name: 'vendor'
-        }),
-        new webpack.optimize.CommonsChunkPlugin({
-            name: 'runtime'
+        new ExtractPlugin({
+          filename: `[name]_[md5:contenthash:hex:8].css`
         })
+        // new ExtractPlugin('styles.[contentHash:8].css')
+        // new webpack.optimize.CommonsChunkPlugin({
+        //     name: 'vendor'
+        // }),
+        // new webpack.optimize.CommonsChunkPlugin({
+        //     name: 'runtime'
+        // })
       ])
     })
 }

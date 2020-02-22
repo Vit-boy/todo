@@ -5,6 +5,7 @@ const createVueLoaderOptions = require('./vue-loader.config')
 const isDev = process.env.NODE_ENV === 'development'
 
 const config = {
+    mode: process.env.NODE_ENV || 'production',
     target: 'web',
     entry: path.join(__dirname, '../client/index.js'),
     output: {
@@ -43,8 +44,9 @@ const config = {
                     {
                         loader: 'url-loader',
                         options: {
+                            esModule: false,
                             limit: 1024,
-                            name: 'resources/images/[name].[hash:8].[ext]'
+                            name: 'resources/[path][name].[hash:8].[ext]'
                         }
                     }
                 ]
