@@ -2,9 +2,10 @@ import Vue from 'vue'
 
 const app = new Vue({
   // el: '#root',
-  template: '<div ref="div">{{text}}</div>',
+  template: '<div ref="div">{{text}} {{obj.a}}</div>',
   data: {
-    text: 0
+    text: 0,
+    obj: {}
   },
   // 如果在vue里声明watch，当组件销毁时候会自动注销，以免内存泄露
   watch: {
@@ -16,8 +17,13 @@ const app = new Vue({
 
 app.$mount('#root')
 
+// let i = 0 
 setInterval(() => {
+  // i++
   app.text += 1
+  // app.obj.a = i
+  // app.$set(app.obj, 'a', i)
+  // app.$forceUpdate()
   // app.$options.data.text += 1
   // app.$data.text += 1
 }, 1000)
@@ -54,3 +60,5 @@ app.$on('test', (a, b) => {
 // setInterval(() => {
 //   app.$emit('test', 1, 2)
 // }, 1000)
+
+// 强制组件重新渲染依次----app.$forceUpdate() 不建议一直运行会耗性能
