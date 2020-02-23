@@ -7,9 +7,9 @@ const baseConfig = require('./webpack.config.base')
 
 const defaultPlugins = [
   new webpack.DefinePlugin({
-      'process.env': {
-          NODE_ENV: '"development"'
-      }
+    'process.env': {
+        NODE_ENV: '"development"'
+    }
   }),
   new HTMLPlugin({
     template: path.join(__dirname, 'template.html')
@@ -20,7 +20,7 @@ const devServer = {
   port: 8888,
   host: '0.0.0.0',
   overlay: {
-      errors: true,
+    errors: true,
   },
   hot: true
 }
@@ -76,7 +76,7 @@ config = merge(baseConfig, {
   devServer,
   // import Vue from 'vue'
   resolve: {
-    alias: {
+    alias: { // 指定import 引入的vue de 位置，因为node_modules里面可以引入的vue有好几个版本;有runtime的vue不能在js里面插入template
       'vue': path.join(__dirname, '../node_modules/vue/dist/vue.esm.js')
     }
   },
