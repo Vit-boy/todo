@@ -9,7 +9,7 @@ export default [
   {
     path: '/app',
     // path: '/app/:id', // 通过路由传参
-    props: true, // 如果这里声明为true，那么这里的id会作为props传到这个组件里面
+    // props: true, // 如果这里声明为true，那么这里的id会作为props传到这个组件里面
     // props: { // 在这里自定义参数的键值
     //   id: '456'
     // },
