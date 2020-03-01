@@ -48,11 +48,11 @@ router.afterEach((to, from) => {
   console.log('after each invoked')
 })
 
-const root = document.createElement('div')
-document.body.appendChild(root)
+// const root = document.createElement('div')
+// document.body.appendChild(root)
 
 new Vue({
   router,
   store,
   render: (h) => h(App)
-}).$mount(root)
+}).$mount('#root')

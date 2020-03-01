@@ -11,6 +11,19 @@ export default context => {
       if (!matchedComponents.length) {
         return reject(new Error('no component matched'))
       }
+      // Promise.all(matchedComponents.map(Component => {
+      //   if (Component.asyncData) {
+      //     return Component.asyncData({
+      //       route: router.currentRoute,
+      //       router
+      //     })
+      //   }
+      // })).then(data => {
+      //   context.meta = app.$meta()
+      //   context.router = router
+      //   resolve(app)
+      // })
+      context.meta = app.$meta()
       resolve(app)
     })
   })

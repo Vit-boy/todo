@@ -30,6 +30,9 @@ import Footer from './layout/footer.jsx'
 console.log(Header.__docs)
 
 export default {
+  metaInfo: {
+    title: 'Jiaan\'s Todo App'
+  },
   components: {
     Header,
     Footer
@@ -97,7 +100,7 @@ export default {
     top: 0
     bottom: 0
     background-color: #999
-    opacity: .9
+    opacity: .5
     z-index: -1
   }
 </style>

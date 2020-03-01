@@ -9,6 +9,9 @@
 
 <script>
 export default {
+  metaInfo: {
+    title: 'Login Page'
+  },
   data () {
     return {
       username: '',

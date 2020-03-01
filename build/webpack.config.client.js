@@ -90,8 +90,8 @@ if (isDev) {
 } else {
   config = merge(baseConfig, {
     entry: {
-      app: path.join(__dirname, '../client/index.js'),
-      // vendor: ['vue']
+      app: path.join(__dirname, '../client/client-entry.js'),
+      vendor: ['vue']
     },
     output: {
       filename: '[name].[chunkhash:8].js'
@@ -151,8 +151,11 @@ if (isDev) {
     },
     plugins: defaultPlugins.concat([
       new ExtractPlugin({
-        filename: `[name]_[md5:contenthash:hex:8].css`
-      })
+        filename: `styles.[md5:contenthash:hex:8].css`
+      }),
+      // new ExtractPlugin({
+      //   filename: `[name]_[md5:contenthash:hex:8].css`
+      // }),
       // new ExtractPlugin('styles.[contentHash:8].css')
       // new webpack.optimize.CommonsChunkPlugin({
       //     name: 'vendor'

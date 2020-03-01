@@ -29,10 +29,13 @@ import Tabs from './tabs.vue'
 let id = 0
 
 export default {
+  metaInfo: {
+    title: 'The Todo App'
+  },
   beforeRouteEnter (to, from, next) {
     console.log('todo before enter')
     next(vm => {
-      console.log('after enter this.id is', vm.id)
+      // console.log('after enter this.id is', vm.id)
     })
   },
   beforeRouteUpdate (to, from, next) {
@@ -45,19 +48,24 @@ export default {
       next()
     }
   },
-  props: ['id'],
+  props: {
+    id: {
+      type: String,
+      default: ''
+    }
+  },
   mounted () {
     console.log(this.id)
-  },
-  components: {
-    Item,
-    Tabs
   },
   data () {
     return {
       todos: [],
       filter: 'all'
     }
+  },
+  components: {
+    Item,
+    Tabs
   },
   computed: {
     filteredTodos () {
